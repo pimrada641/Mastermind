@@ -31,6 +31,11 @@ public class PlayerMovement : MonoBehaviour
         cam = GameObject.FindWithTag("MainCamera").transform;
         
         view = GetComponent<PhotonView>();
+
+        if(view.IsMine){
+            charactercontroller.enabled = true;
+            playerAction.enabled = true;
+        }
     }
 
     void Move(){
@@ -46,8 +51,6 @@ public class PlayerMovement : MonoBehaviour
             // camfree.enabled = true;
             camfree.Follow = followPosition;
             camfree.LookAt = followPosition;
-            charactercontroller.enabled = true;
-            playerAction.enabled = true;
 
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
