@@ -8,11 +8,15 @@ TagManager:
   - OtherPlayer
   - Enemy
   - Melee
+  - Foot
+  - LeftHand
+  - RightHand
+  - Malee
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Scene
   - Water
   - UI
   - 

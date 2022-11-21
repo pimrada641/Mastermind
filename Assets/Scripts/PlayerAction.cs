@@ -38,17 +38,46 @@ public class PlayerAction : MonoBehaviour
 
     //Took Damage System
     private void OnTriggerEnter(Collider other){
-        if(other.gameObject.CompareTag("Melee") && !other.transform.root.CompareTag("Player")){
-            enemyAnim = other.GetComponentInParent<Animator>();
+        if(other.transform.CompareTag("Melee") && !other.transform.root.CompareTag("Player")){
+            enemyAnim = other.transform.root.GetComponent<Animator>();
+            // GameObject otherobj = other.gameObject;
+            Debug.Log(other.transform.GetChild(0).gameObject);
 
             if( enemyAnim != null){
-                if(enemyAnim.GetBool("Attack")==true){
-                    Debug.Log("Get Hit");
-                    this.playerHealth.TakeDamage(damage);
-                    animator.SetTrigger("Hit");
-                    enemyAnim.ResetTrigger("Attack");
+                CheckMelee(other.transform.GetChild(0).gameObject);
+                // if(enemyAnim.GetBool("Attack")==true){
+                    
+                    // Debug.Log("Get Hit");
+                    // this.playerHealth.TakeDamage(damage);
+                    // animator.SetTrigger("Hit");
+                    // enemyAnim.ResetTrigger("Attack");
+                    // enemyAnim.ResetTrigger("LeftAttack");
+                    // enemyAnim.ResetTrigger("RightAttack");
+                    // enemyAnim.ResetTrigger("FootAttack");
+                // }
             }
-            }
+        }
+    }
+
+    void CheckMelee(GameObject other){
+
+        if(other.gameObject.CompareTag("RightHand") && enemyAnim.GetBool("RightAttack")==true){
+            Debug.Log("Get Hit: Right");
+            this.playerHealth.TakeDamage(damage);
+            animator.SetTrigger("Hit");
+            enemyAnim.ResetTrigger("RightAttack");
+        }
+        else if(other.gameObject.CompareTag("LeftHand") && enemyAnim.GetBool("LeftAttack")==true){
+            Debug.Log("Get Hit: Left");
+            this.playerHealth.TakeDamage(damage);
+            animator.SetTrigger("Hit");
+            enemyAnim.ResetTrigger("LeftAttack");
+        }
+        else if(other.gameObject.CompareTag("Foot") && enemyAnim.GetBool("FootAttack")==true){
+            Debug.Log("Get Hit: Foot");
+            this.playerHealth.TakeDamage(damage);
+            animator.SetTrigger("Hit");
+            enemyAnim.ResetTrigger("FootAttack");
         }
     }
 
