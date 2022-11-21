@@ -7,6 +7,8 @@ public class PlayerAction : MonoBehaviour
     int punch;
     public Animator animator;
     public Animator enemyAnim;
+    public int damage = 20;
+    public PlayerHealth playerHealth;
     void Update()
     {
         //AttackSystem
@@ -36,16 +38,18 @@ public class PlayerAction : MonoBehaviour
 
     //Took Damage System
     private void OnTriggerEnter(Collider other){
-        if(other.gameObject.CompareTag("Melee")){
+        if(other.gameObject.CompareTag("Melee") && !other.transform.root.CompareTag("Player")){
             enemyAnim = other.GetComponentInParent<Animator>();
 
-            if(enemyAnim.GetBool("Attack")==true){
-                Debug.Log("Get Hit");
-                animator.SetTrigger("Hit");
-                enemyAnim.ResetTrigger("Attack");
+            if( enemyAnim != null){
+                if(enemyAnim.GetBool("Attack")==true){
+                    Debug.Log("Get Hit");
+                    this.playerHealth.TakeDamage(damage);
+                    animator.SetTrigger("Hit");
+                    enemyAnim.ResetTrigger("Attack");
+            }
             }
         }
-        
     }
 
 }
