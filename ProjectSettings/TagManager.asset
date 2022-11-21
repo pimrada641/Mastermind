@@ -5,8 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - ThirdPersonCam
-  - Malee
   - OtherPlayer
+  - Enemy
+  - Melee
   layers:
   - Default
   - TransparentFX
