@@ -5,13 +5,16 @@ using UnityEngine;
 public class AttackEventControl : MonoBehaviour
 {
     public Animator animator;
+    public PlayerMovement playerMovement;
     void Start()
     {
         animator = GetComponent<Animator>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
     void BeginAttack(){
         Debug.Log("Begin Attack");
         animator.SetTrigger("Attack");
+        playerMovement.enabled = false;
     }
 
     void RightAttack(){
@@ -33,6 +36,7 @@ public class AttackEventControl : MonoBehaviour
         animator.ResetTrigger("RightAttack");
     }
     void EndAttack(){
+        playerMovement.enabled = true;
         animator.ResetTrigger("Attack");
         animator.ResetTrigger("RightAttack");
         animator.ResetTrigger("LeftAttack");

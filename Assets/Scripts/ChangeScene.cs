@@ -5,9 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-    public Animator animator;
+    public void StartGame(){
+        StartCoroutine(LoadNextScene());
+    }
 
-    public void Back(){
+    IEnumerator LoadNextScene(){
+        yield return new WaitForSeconds(2); 
         SceneManager.LoadScene("Loading");
     }
+    
 }

@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
     Animator animator;
     CharacterController controller;
     PlayerMovement playerMovement;
-    public int health;
+    public int health = 0;
     public int maxHealth = 100;
 
     void Start()
