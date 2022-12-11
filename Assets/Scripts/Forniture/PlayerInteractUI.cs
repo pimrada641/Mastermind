@@ -6,6 +6,9 @@ public class PlayerInteractUI : MonoBehaviour
 {
     [SerializeField] private GameObject containerGameObject;
     [SerializeField] private PlayerInteract playerInteract;
+    void Start(){
+        playerInteract = GameObject.FindWithTag("Player").GetComponent<PlayerInteract>();
+    }
 
     private void Update(){
         if (playerInteract.capsuleInteractObj() != null){

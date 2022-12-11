@@ -13,5 +13,9 @@ public class ChangeScene : MonoBehaviour
         yield return new WaitForSeconds(2); 
         SceneManager.LoadScene("Loading");
     }
+
+    public void BackToGame(){
+        SceneManager.LoadScene("SampleScene");
+    }
     
 }
