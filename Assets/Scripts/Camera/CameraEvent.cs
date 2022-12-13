@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class CameraEvent : MonoBehaviour
 {
@@ -20,11 +21,15 @@ public class CameraEvent : MonoBehaviour
         // character.SetActive(false);
         cameraAnim = mainCamera.GetComponent<Animator>();
         FadeAnim = fade.GetComponent<Animator>();
+
+        if(this.cameraAnim.GetCurrentAnimatorStateInfo(0).IsName("birdeyeview")){
+            isBirdEyeView = true;
+        }
     }
     void Update() {
         if(isBirdEyeView==true){
             character.transform.position = new Vector3(character.transform.position.x,character.transform.position.y,Mathf.Lerp(-1295f,715f,t));
-            t += 0.05f * Time.deltaTime;
+            t += 0.1f * Time.deltaTime;
         }
     }
     void FinishTransPosition()
@@ -40,14 +45,13 @@ public class CameraEvent : MonoBehaviour
 
     void LastCameraFinished(){
         character.SetActive(true);
-        isBirdEyeView = true;
         FadeAnim.SetTrigger("LightOut");
         StartCoroutine(waitbeforenewscene());
     }
 
     IEnumerator waitbeforenewscene(){
-        yield return new WaitForSeconds(3f);
-        FadeAnim.SetTrigger("LightIn");
+        yield return new WaitForSeconds(5f);
+        SceneManager.LoadScene("Trailer2");
     }
 
     void CameraRunFinished(){
